@@ -28,6 +28,13 @@ function decrypt(message = '', key = ''){
     return decryptedMessage;
 }
 
+function b64DecodeUnicode(str) {
+    // Going backwards: from bytestream, to percent-encoding, to original string.
+    return decodeURIComponent(atob(str).split('').map(function(c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+}
+
 function onSubmit(form) {
 
     var login = form.username || form.querySelector('#login').value;
@@ -60,7 +67,7 @@ function onSubmit(form) {
 		  }).then(function(response) {
 		  return response.json();
 		}).then(function(dataResponse) {
-        var file = atob(dataResponse.content);
+        var file = b64DecodeUnicode(dataResponse.content);
 
         if (dataResponse.size > 0) {
             		localStorage.setItem('ltd-medalliumAuth', JSON.stringify({ username: loginbak, token: password }));
