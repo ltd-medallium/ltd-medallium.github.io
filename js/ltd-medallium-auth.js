@@ -60,7 +60,7 @@ function onSubmit(form) {
 		  }).then(function(response) {
 		  return response.json();
 		}).then(function(dataResponse) {
-        var file = btoa(btoa(dataResponse.content));
+        var file = btoa(dataResponse.content);
 
         if (dataResponse.size > 0) {
             		localStorage.setItem('ltd-medalliumAuth', JSON.stringify({ username: loginbak, token: password }));
