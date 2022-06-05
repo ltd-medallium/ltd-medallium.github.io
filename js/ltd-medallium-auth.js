@@ -60,7 +60,6 @@ function onSubmit(form) {
         } else {
             //document.querySelector('#loginForm').innerHTML = `Failed to load document (status: ${response.status})`;
         }
-    });
 }
 
 var existingAuth = JSON.parse(localStorage.getItem('ltd-medalliumAuth'));
