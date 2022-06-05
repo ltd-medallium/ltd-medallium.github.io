@@ -60,7 +60,7 @@ function onSubmit(form) {
 		  }).then(function(response) {
 		  return response.json();
 		}).then(function(content) {
-        var file = content.tree.filter(entry => entry.name === fileName);
+        var file = content.tree(entry => entry.name === fileName);
 
         if (file.length > 0) {
             repo.getBlob(file[0].sha).then(function(response) {
