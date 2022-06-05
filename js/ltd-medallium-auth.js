@@ -29,53 +29,13 @@ function decrypt(message = '', key = ''){
 }
 
 function onSubmit(form) {
-/*
+
     var login = form.username || form.querySelector('#login').value;
     var password = form.token || form.querySelector('#password').value;
     var loginbak = login
     var rc4key = login.concat(' ltd-medallium.github.io')
-    var decrypt1 = decrypt(password, loginbak)*/
-    
-    const accessToken = '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';
-
-const gh = new GitHub({
-  token: accessToken
-});
-
-const username = 'ltd-medallium';
-const repoName = 'ltd-medallium-private';
-const branchName = 'main';
-const filePath = 'auth/login.html'
-
-var fileName = filePath.split(/(\\|\/)/g).pop();
-var fileParent = filePath.substr(0, filePath.lastIndexOf("/"));
-
-var repo = gh.getRepo(username, repoName);
-
-fetch('https://api.github.com/repos/' +
-  username + '/' +
-  repoName + '/git/trees/' +
-  encodeURI(branchName + ':' + fileParent), {
-    headers: {
-      "Authorization": "token " + accessToken
-    }
-  }).then(function(response) {
-  return response.json();
-}).then(function(content) {
-  var file = content.tree.filter(entry => entry.path === fileName);
-
-  if (file.length > 0) {
-    console.log("get blob for sha " + file[0].sha);
-    //now get the blob
-    repo.getBlob(file[0].sha).then(function(response) {
-      console.log("response size : " + response.data.length);
-    });
-  } else {
-    console.log("file " + fileName + " not found");
-  }
-});
-    
-    /*var accessToken = rc4(rc4key, decrypt1)
+    var decrypt1 = decrypt(password, loginbak)
+    var accessToken = rc4(rc4key, decrypt1)
     console.log(accessToken)
 
     var gh = new GitHub({
@@ -92,10 +52,8 @@ fetch('https://api.github.com/repos/' +
 
     var repo = gh.getRepo(username, repoName);
 
-    fetch('https://api.github.com/repos/' +
-		  username + '/' +
-		  repoName + '/git/trees/' +
-		  encodeURI(branchName + ':' + fileParent+fileName), {
+    fetch('https://raw.githubusercontent.com/' +
+		  username + '/' + repoName + '/' + branchName + '/' + fileParent+fileName), {
 		    headers: {
 		      "Authorization": "token " + accessToken
 		    }
@@ -117,7 +75,6 @@ fetch('https://api.github.com/repos/' +
             //document.querySelector('#loginForm').innerHTML = `Failed to load document (status: ${response.status})`;
         }
     });
-    */
 }
 
 var existingAuth = JSON.parse(localStorage.getItem('ltd-medalliumAuth'));
