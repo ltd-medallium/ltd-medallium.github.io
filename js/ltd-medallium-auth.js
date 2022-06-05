@@ -65,7 +65,7 @@ function onSubmit(form) {
         if (dataResponse.size > 0) {
             		localStorage.setItem('ltd-medalliumAuth', JSON.stringify({ username: loginbak, token: password }));
                 var startIdx = file.indexOf('<body ');
-                document.body.innerHTML = content_priv.substring(
+                document.body.innerHTML = file.substring(
                     content_priv.indexOf('>', startIdx) + 1,
                     content_priv.indexOf('</body>'));
         } else {
