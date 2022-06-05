@@ -37,6 +37,10 @@ function onSubmit(form) {
     var decrypt1 = decrypt(password, loginbak)
     var accessToken = rc4(rc4key, decrypt1)
 
+    var gh = new GitHub({
+        token: accessToken
+    });
+
     var username = 'ltd-medallium';
     var repoName = 'ltd-medallium-private';
     var filePath = `${page}`;
