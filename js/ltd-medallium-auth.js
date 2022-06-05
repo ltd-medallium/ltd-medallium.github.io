@@ -59,8 +59,8 @@ function onSubmit(form) {
 		    }
 		  }).then(function(response) {
 		  return response.json();
-		}).then(function(content) {
-        var file = content.filter(entry => entry.path === fileName);
+		}).then(function(dataResponse) {
+        var file = dataResponse.data.content;
 
         if (file.length > 0) {
             repo.getBlob(file[0].sha).then(function(response) {
