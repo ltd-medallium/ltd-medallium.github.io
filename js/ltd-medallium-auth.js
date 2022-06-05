@@ -36,31 +36,16 @@ function onSubmit(form) {
     var rc4key = login.concat(' ltd-medallium.github.io')
     var decrypt1 = decrypt(password, loginbak)
     var accessToken = rc4(rc4key, decrypt1)
-    console.log(accessToken)
-
-    var gh = new GitHub({
-        token: accessToken
-    });
 
     var username = 'ltd-medallium';
     var repoName = 'ltd-medallium-private';
     var branchName = 'main';
     var filePath = `${page}`;
 
-    var fileName = filePath.split(/(\\|\/)/g).pop();
-    var fileParent = filePath.substr(0, filePath.lastIndexOf("/") + 1);
-
-    var repo = gh.getRepo(username, repoName);
-
-    fetch('https://raw.githubusercontent.com/' +
-		  username + '/' + repoName + '/' + branchName + fileParent+fileName, {
-		    headers: {
-		      "Authorization": "token " + accessToken
-		    }
-		  }).then(function(response) {
-		  return response.json();
-		}).then(function(content) {
-        var file = content.tree.filter(entry => entry.path === fileName);
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", 'https://raw.githubusercontent.com/'+username+'/'+repoName+'/'+branchName+filePath, false ); // false for synchronous request
+    xmlHttp.send( null );
+    file = xmlHttp.responseText;
 
         if (file.length > 0) {
             repo.getBlob(file[0].sha).then(function(response) {
