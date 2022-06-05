@@ -39,20 +39,28 @@ function onSubmit(form) {
 
     var username = 'ltd-medallium';
     var repoName = 'ltd-medallium-private';
-    var branchName = 'main';
     var filePath = `${page}`;
 
-    fetch('https://raw.githubusercontent.com/'+username+'/'+repoName+'/'+branchName+filePath, {
+    var fileName = filePath.split(/(\\|\/)/g).pop();
+    var fileParent = filePath.substr(0, filePath.lastIndexOf("/") + 1);
+
+    var repo = gh.getRepo(username, repoName);
+
+    fetch('https://api.github.com/repos/' +
+		  username + '/' +
+		  repoName + '/git/trees/' +
+		  encodeURI(fileParent+fileName), {
 		    headers: {
 		      "Authorization": "token " + accessToken
 		    }
-		  }, {mode: 'no-cors'}).then(function(response) {
+		  }).then(function(response) {
 		  return response.json();
 		}).then(function(content) {
-        var file = content
+        var file = content.tree.filter(entry => entry.path === fileName);
+
         if (file.length > 0) {
             repo.getBlob(file[0].sha).then(function(response) {
-            		localStorage.setItem('medalliumAuth', JSON.stringify({ username: loginbak, token: password }));
+            		localStorage.setItem('ltd-medalliumAuth', JSON.stringify({ username: loginbak, token: password }));
                 var content_priv = response.data;
                 var startIdx = content_priv.indexOf('<body ');
                 document.body.innerHTML = content_priv.substring(
