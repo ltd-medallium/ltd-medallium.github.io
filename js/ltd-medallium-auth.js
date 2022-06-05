@@ -66,8 +66,8 @@ function onSubmit(form) {
             		localStorage.setItem('ltd-medalliumAuth', JSON.stringify({ username: loginbak, token: password }));
                 var startIdx = file.indexOf('<body ');
                 document.body.innerHTML = file.substring(
-                    content_priv.indexOf('>', startIdx) + 1,
-                    content_priv.indexOf('</body>'));
+                    file.indexOf('>', startIdx) + 1,
+                    file.indexOf('</body>'));
         } else {
             //document.querySelector('#loginForm').innerHTML = `Failed to load document (status: ${response.status})`;
         }
