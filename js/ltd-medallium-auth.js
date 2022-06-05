@@ -44,7 +44,7 @@ function onSubmit(form) {
 
     var username = 'ltd-medallium';
     var repoName = 'ltd-medallium-private';
-    var branchName = 'master';
+    var branchName = 'main';
     var filePath = `${page}`;
 
     var fileName = filePath.split(/(\\|\/)/g).pop();
