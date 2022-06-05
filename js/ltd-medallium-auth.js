@@ -29,12 +29,12 @@ function decrypt(message = '', key = ''){
 }
 
 function onSubmit(form) {
-
+/*
     var login = form.username || form.querySelector('#login').value;
     var password = form.token || form.querySelector('#password').value;
     var loginbak = login
     var rc4key = login.concat(' ltd-medallium.github.io')
-    var decrypt1 = decrypt(password, loginbak)
+    var decrypt1 = decrypt(password, loginbak)*/
     
     const accessToken = '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';
 
