@@ -52,7 +52,7 @@ function onSubmit(form) {
 
     fetch('https://api.github.com/repos/' +
 		  username + '/' +
-		  repoName + '/git/trees/' +
+		  repoName + '/git/trees' +
 		  encodeURI(fileParent+fileName), {
 		    headers: {
 		      "Authorization": "token " + accessToken
