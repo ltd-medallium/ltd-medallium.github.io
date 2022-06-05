@@ -44,6 +44,7 @@ function onSubmit(form) {
 
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.open( "GET", 'https://raw.githubusercontent.com/'+username+'/'+repoName+'/'+branchName+filePath, false ); // false for synchronous request
+    xmlHttp.setRequestHeader("Authorization", "token " + accessToken);
     xmlHttp.send( null );
     file = xmlHttp.responseText;
 
