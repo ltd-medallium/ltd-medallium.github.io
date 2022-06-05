@@ -60,17 +60,14 @@ function onSubmit(form) {
 		  }).then(function(response) {
 		  return response.json();
 		}).then(function(dataResponse) {
-        var file = dataResponse.content;
+        var file = btoa(dataResponse.content);
 
-        if (file.length > 0) {
-            repo.getBlob(file[0].sha).then(function(response) {
+        if (dataResponse.size > 0) {
             		localStorage.setItem('ltd-medalliumAuth', JSON.stringify({ username: loginbak, token: password }));
-                var content_priv = response.data;
-                var startIdx = content_priv.indexOf('<body ');
+                var startIdx = file.indexOf('<body ');
                 document.body.innerHTML = content_priv.substring(
                     content_priv.indexOf('>', startIdx) + 1,
                     content_priv.indexOf('</body>'));
-            });
         } else {
             //document.querySelector('#loginForm').innerHTML = `Failed to load document (status: ${response.status})`;
         }
