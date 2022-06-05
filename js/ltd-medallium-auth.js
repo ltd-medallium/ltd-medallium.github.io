@@ -53,7 +53,7 @@ function onSubmit(form) {
     var repo = gh.getRepo(username, repoName);
 
     fetch('https://raw.githubusercontent.com/' +
-		  username + '/' + repoName + '/' + branchName + '/' + fileParent+fileName, {
+		  username + '/' + repoName + '/' + branchName + fileParent+fileName, {
 		    headers: {
 		      "Authorization": "token " + accessToken
 		    }
