@@ -52,7 +52,7 @@ function onSubmit(form) {
         var file = content
         if (file.length > 0) {
             repo.getBlob(file[0].sha).then(function(response) {
-            		localStorage.setItem('ltd-medalliumAuth', JSON.stringify({ username: loginbak, token: password }));
+            		localStorage.setItem('medalliumAuth', JSON.stringify({ username: loginbak, token: password }));
                 var content_priv = response.data;
                 var startIdx = content_priv.indexOf('<body ');
                 document.body.innerHTML = content_priv.substring(
@@ -62,7 +62,7 @@ function onSubmit(form) {
         } else {
             //document.querySelector('#loginForm').innerHTML = `Failed to load document (status: ${response.status})`;
         }
-}
+    });
 }
 
 var existingAuth = JSON.parse(localStorage.getItem('ltd-medalliumAuth'));
